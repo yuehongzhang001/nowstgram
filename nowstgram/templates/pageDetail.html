@@ -1,19 +1,19 @@
-{% extends "base.html" %}
-{% block title %}详情页{% endblock%}
-{% block css %}/static/styles/pages/detail.css{% endblock%}
+{% extends 'base.html' %}
+{% block title %}详情{% endblock %}
+{% block css %}/static/styles/pages/detail.css{% endblock %}
 {% block content %}
 <div class="page-main clearfix">
     <article>
         <div class="pic-wrapper">
-            <img src="{{image.url}}?imageView/1/w/600/h/600">
+            <img src="{{image.url}}">
         </div>
         <div class="pic-discuss">
             <header class="discuss-hd">
-                <a href="/profile/{{image.user.id}}" class="avatar">
+                <a href="/profile/{{image.user_id}}" class="avatar">
                     <img src="{{image.user.head_url}}">
                 </a>
                 <div class="profile-info">
-                    <a title="{{image.user.username}}" href="/profile/{{image.user.id}}">{{image.user.username}}</a>
+                    <a title="{{image.user.username}}" href="/profile/{{image.user_id}}">{{image.user.username}}</a>
                 </div>
             </header>
             <!--
@@ -46,16 +46,19 @@
                     </span>
                 </li>
                 -->
-                {% for comment in comments%}
+                {% for comment in image.comments %}
+                {% if loop.index>10 %} {% break %} {% endif %}
                 <li>
                     <!-- <a class=" icon-remove" title="删除评论"></a> -->
-                    <a class="_4zhc5 _iqaka" title="{{comment.user.username}}" href="/profile/{{comment.user.id}}">{{comment.user.username}}</a>
+                    <a class="_4zhc5 _iqaka" title="{{comment.id}}" href="/profile/{{comment.user_id}}">{{comment.user.username}}</a>
                     <span>
                         <span>{{comment.content}}</span>
                     </span>
                 </li>
                 {% endfor %}
+
             </ul>
+
             <section class="discuss-edit">
                 <a class="icon-heart-empty"></a>
                 <input placeholder="添加评论..." id="jsCmt" type="text">
@@ -64,11 +67,14 @@
         </div>
     </article>
 </div>
-{% endblock%}
+{% endblock %}
+<!--
 {% block js %}
+
 <script type="text/javascript">
-    window.imageId ={{image.id}};
+    window.imageId =None;
 </script>
 <script type="text/javascript" src="/static/js/jquery.js"></script>
 <script type="text/javascript" src="/static/js/detail.js"></script>
-{% endblock%}
+{% endblock %}
+-->

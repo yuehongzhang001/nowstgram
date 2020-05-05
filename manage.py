@@ -23,16 +23,8 @@ def init_database():
                 db.session.add(Comment('This is comment '+str(k),3*i+j+1,i+1))
     db.session.commit()
 
-    for i in range(0,10,2):
-        user = User.query.get(i+1)
-        user.username = '[New] '+user.username
 
-    User.query.filter_by(id=10).update({'username':'[New2]'})
 
-    tod = Comment.query.get(1)
-    Comment.query.filter(Comment.id>5).delete()
-    db.session.delete(tod)
-    db.session.commit()
 
     # print 1, User.query.all()
     # print 2, User.query.get(1)
